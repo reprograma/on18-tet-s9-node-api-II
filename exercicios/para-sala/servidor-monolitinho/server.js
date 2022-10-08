@@ -151,6 +151,25 @@ app.put("/filmes/substituir/:id", async (request, response)=>{
     })
 })
 
+//metodo PATCH: atualizar somente titulo de um dado existente
+app.patch("/filmes/updatetitulo/:id", async (request, response)=>{
+    let dbFilmes = await bancoDeDados()
+    let filmesJson = dbFilmes.filmes
+
+    let idRequest = request.params.id
+    let novoTitulo = request.body.Title
+
+    let filmeEncontrado = filmesJson.find(filme => filme.id == idRequest)
+
+    filmeEncontrado.Title = novoTitulo
+
+    response.status(200).json({
+        "mensagem": "titulo atualizado com sucesso",
+        "filme-atualizado": filmeEncontrado
+    })
+
+})
+
 app.get("/series", async (request, response)=>{
     let dbseries = await bancoDeDados()
 
