@@ -129,6 +129,28 @@ app.delete("/filmes/deletar/:id", async (request, response)=>{
     })
 })
 
+//metodo PUT
+//substituir o dado
+
+app.put("/filmes/substituir/:id", async (request, response)=>{
+    const dbFilmes = await bancoDeDados()
+    let filmesJson = dbFilmes.filmes
+
+    let idRequest = request.params.id
+    let bodyRequest = request.body
+
+    let filmeEncontrado = filmesJson.find( filme => filme.id == idRequest)
+
+    const indice = filmesJson.indexOf(filmeEncontrado)
+
+    //ARRAY.splice(INDICE, o item que vamos deletar, o item q vei no lugar)
+    filmesJson.splice(indice, 1, bodyRequest)
+    response.status(200).json({
+        "mensagem": "filme atualizado com sucesso",
+        "filme-atualizado": bodyRequest
+    })
+})
+
 app.get("/series", async (request, response)=>{
     let dbseries = await bancoDeDados()
 
