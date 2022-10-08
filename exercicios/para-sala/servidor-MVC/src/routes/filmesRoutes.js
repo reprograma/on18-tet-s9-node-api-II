@@ -11,6 +11,8 @@ const router = express.Router()
 //router.METODO(rota, função)
 router.get("/catalogo", controller.getAll)
 
+router.get("/pesquisar/:id", controller.getById)
+
 
 //exportar para ser usado no app.js
 module.exports = router
