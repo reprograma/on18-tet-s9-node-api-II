@@ -1,10 +1,23 @@
 # Exercício de Casa 🏠 
 
-## Nome do Exercicio
+<h1 align="center">
+  <img src="../../assets/paraolar.png" alt="logo reprograma" width="500">
+</h1>
 
-- Explicação do exercício: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam leo nibh, tempus sed rhoncus et, ultrices vitae orci.
-Donec erat mauris, laoreet in tortor vel, eleifend suscipit nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-Aliquam leo nibh, tempus sed rhoncus et, ultrices vitae orci. Donec erat mauris, laoreet in tortor vel, eleifend suscipit nibh. 
+- Usando a arquitetura MVC construa a API  que foi pedida pela galera de negocio.
+- Documente sua API de forma adequada
+
+### Pedidos de negócio
+- [ ] Quero uma rota que venha todos os filmes e series
+duas rotas a /filmes e a /series
+- [ ] /filmes deve retornar todos os filmes
+- [ ] /series deve retornar todos as series
+- [ ] Devo conseguir filtrar por titulo, id e genero
+- [ ] Devo conseguir cadastrar filmes e series
+- [ ] Devo conseguir editar o nome de qualquer um deles
+- [ ] Devo conseguir substituir tudo de um filme ou serie
+- [ ] Devo conseguir editar qualquer campo deles
+- [ ] Quero casos de erro
 ---
 
 Terminou o exercício? Dá uma olhada nessa checklist e confere se tá tudo certinho, combinado?!
