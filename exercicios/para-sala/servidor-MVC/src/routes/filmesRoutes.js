@@ -13,6 +13,8 @@ router.get("/catalogo", controller.getAll)
 
 router.get("/pesquisar/:id", controller.getById)
 
+router.put("/update/generico/:id", controller.updateGenerico)
+
 
 //exportar para ser usado no app.js
 module.exports = router
