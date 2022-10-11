@@ -13,6 +13,22 @@ const getAll = async(request, response)=>{
     }
 }
 
+//get por query params
+const getByGenre = async(request, response)=>{
+    try {
+        const seriesJson = await dbConnect()
+        const generoRequest = request.query.genero
+
+        const seriesFiltradas = seriesJson.filter(filme => filme.genre.toString().includes(generoRequest))
+
+        response.status(200).send(seriesFiltradas)
+
+    } catch (error) {
+        response.status(500).json({message: error.message})
+    }
+}
+
 module.exports = {
-    getAll
+    getAll,
+    getByGenre
 }
