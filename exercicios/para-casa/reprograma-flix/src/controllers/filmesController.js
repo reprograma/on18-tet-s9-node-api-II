@@ -65,7 +65,6 @@ const getByGenre = async(request,response) => {
     }
 }
 
-
 // [POST]  Cadastrar novo filme
 const cadastrarNovoFilme = async(request, response) =>{
     try {
