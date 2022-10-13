@@ -86,6 +86,8 @@ app.get("/filmes/buscar", async (request, response)=>{
     }
 })
 
+
+
 app.post("/filmes/cadastrar", async (request, response)=>{
     let bodyRequest = request.body
     let dbFilmes = await bancoDeDados()
@@ -107,6 +109,24 @@ app.post("/filmes/cadastrar", async (request, response)=>{
     })
 
 })
+
+app.put("/filmes/substituir/:id", async(request, response)=>{
+    const dbFilmes = await bancoDeDados()
+    let filmesJson = dbfilmes.filmes
+    
+    let idRequest = request.params.id
+    let bodyRequest = request.body
+
+    let fimesEncontrado = filmesJson.find( filme => filme.id == idRequest)
+    
+    const indice = filmesJson.indexOf(filmeEncontrado)
+
+    filmesJson.splice(indice, 1, bodyRequest)
+    response.status(200).json({
+        "mensagem": "filme atualizado com sucesso",
+        "filme-atualizado": bodyRequest
+    })
+}
 
 app.get("/series", async (request, response)=>{
     let dbseries = await bancoDeDados()
