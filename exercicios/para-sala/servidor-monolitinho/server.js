@@ -18,7 +18,6 @@ const app = express()
 //parser do body em json
 app.use(express.json())
 
-
 app.get("/filmes", async (request, response)=>{
     let dbFilmes = await bancoDeDados()
 
@@ -47,7 +46,7 @@ app.get("/filmes/pesquisar", async (request, response)=>{
         let dbFilmes = await bancoDeDados()
         let tituloRequest = request.query.titulo.toLowerCase()
 
-        let encontrarPorTitulo = dbFilmes.filmes.filter(filme => filme.title.toLowerCase().includes(tituloRequest))
+        let encontrarPorTitulo = dbFilmes.filmes.filter(filme => filme.Title.toLowerCase().includes(tituloRequest))
 
         console.log(encontrarPorTitulo)
 
@@ -114,6 +113,25 @@ app.get("/series", async (request, response)=>{
     response.status(200).send(dbseries.series)
 })
 
+// app.delete("/filmes/deletar/:id", async (request, response) =>{
+//     const dbFilmes = await bancoDeDados()
+//     let filmesJson = dbFilmes.filmes
+//     let idRequest = request.params.id
+
+//     const filmeEncontrado = filmesJson.find(filme => filme.id == idRequest)
+
+//     const indice = filmesJson.indexOf (filmeEncontrado)
+
+//     filmesJson.splice(indice, 1)
+
+//     response.status(200).json({
+//         "mensagem":"filme foi deletado com sucesso",
+//         "filme-deletado": filmeEncontrado
+//     })
+// })
+
+// app.put ("/filmes/substituit/:id", async (request, response)=> 
+// );
 app.listen(1313, ()=>{
     console.log("servidor rodando")
 })
