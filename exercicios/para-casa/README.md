@@ -12,8 +12,8 @@
 duas rotas a /filmes e a /series
 - [ ] /filmes deve retornar todos os filmes
 - [ ] /series deve retornar todos as series
-- [ ] Devo conseguir filtrar por titulo, id e genero
-- [ ] Devo conseguir cadastrar filmes e series
+- [ ] Devo conseguir filtrar por titulo, id e genero 
+- [ ] Devo conseguir cadastrar filmes e series 
 - [ ] Devo conseguir editar o nome de qualquer um deles
 - [ ] Devo conseguir substituir tudo de um filme ou serie
 - [ ] Devo conseguir editar qualquer campo deles
