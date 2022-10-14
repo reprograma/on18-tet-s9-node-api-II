@@ -1,3 +1,4 @@
+
 function bancoDeDados(dado){
     return new Promise((resolve, reject)=>{
         setTimeout(() => {
