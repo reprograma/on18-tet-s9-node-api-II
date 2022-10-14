@@ -96,7 +96,7 @@ const patchTituloSerie = async(request, response) => {
         const bodyRequest = request.body
         const series = await dbConnect();
         const id = request.params.id;
-        const novoTitulo = bodyRequest.Title;
+        const novoTitulo = bodyRequest.title;
 
         const serie = series.find( serie => serie.id == id );
 
@@ -106,8 +106,7 @@ const patchTituloSerie = async(request, response) => {
 
         serie.title = novoTitulo;
 
-        series.push(novoFilme);
-        return response.status(201).send({
+        return response.status(200).send({
             mensagem: "Série atualizada com sucesso",
             serie
         });
@@ -137,8 +136,7 @@ const putSerie = async(request, response) => {
             }
         }
 
-        series.push(novoFilme);
-        return response.status(201).send({
+        return response.status(200).send({
             mensagem: "Série atualizada com sucesso",
             serie
         });
@@ -169,8 +167,7 @@ const patchSerie = async(request, response) => {
             }
         }
 
-        series.push(novoFilme);
-        return response.status(201).send({
+        return response.status(200).send({
             mensagem: "Filme atualizado com sucesso",
             serie
         });

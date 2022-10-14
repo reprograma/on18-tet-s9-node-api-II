@@ -97,8 +97,7 @@ const patchTituloFilme = async(request, response) => {
 
         filme.Title = novoTitulo;
 
-        filmes.push(novoFilme);
-        return response.status(201).send({
+        return response.status(200).send({
             mensagem: "Filme atualizado com sucesso",
             filme
         });
@@ -129,8 +128,7 @@ const putFilme = async(request, response) => {
             }
         }
 
-        filmes.push(novoFilme);
-        return response.status(201).send({
+        return response.status(200).send({
             mensagem: "Filme atualizado com sucesso",
             filme
         });
@@ -160,8 +158,7 @@ const patchFilme = async(request, response) => {
             }
         }
 
-        filmes.push(novoFilme);
-        return response.status(201).send({
+        return response.status(200).send({
             mensagem: "Filme atualizado com sucesso",
             filme
         });
