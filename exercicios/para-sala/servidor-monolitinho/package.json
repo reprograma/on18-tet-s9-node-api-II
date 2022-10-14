@@ -1,5 +1,5 @@
 {
-  "name": "projeto-casa",
+  "name": "monolitinho",
   "version": "1.0.0",
   "description": "- Explicação do projeto: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam leo nibh, tempus sed rhoncus et, ultrices vitae orci.\r Donec erat mauris, laoreet in tortor vel, eleifend suscipit nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit.\r Aliquam leo nibh, tempus sed rhoncus et, ultrices vitae orci. Donec erat mauris, laoreet in tortor vel, eleifend suscipit nibh. \r ---",
   "main": "server.js",

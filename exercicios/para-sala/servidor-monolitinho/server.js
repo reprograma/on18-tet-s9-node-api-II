@@ -47,7 +47,7 @@ app.get("/filmes/pesquisar", async (request, response)=>{
         let dbFilmes = await bancoDeDados()
         let tituloRequest = request.query.titulo.toLowerCase()
 
-        let encontrarPorTitulo = dbFilmes.filmes.filter(filme => filme.title.toLowerCase().includes(tituloRequest))
+        let encontrarPorTitulo = dbFilmes.filmes.filter(filme => filme.Title.toLowerCase().includes(tituloRequest))
 
         console.log(encontrarPorTitulo)
 
@@ -70,8 +70,10 @@ app.get("/filmes/buscar", async (request, response)=>{
 
         const chaves = Object.keys(parametros);
 
+        console.log(chaves)
+
         const filtrado = filmesJson.filter((filme) => {
-              return chaves.some(key => RegExp(parametros[key], 'i').test(filme[key].toString()));
+              return chaves.some(chave => RegExp(parametros[chave], 'i').test(filme[chave].toString()));
             });
     
         console.log(filtrado);
@@ -95,8 +97,8 @@ app.post("/filmes/cadastrar", async (request, response)=>{
 
     let novoFilme = {
         id:(filmes.length)+1,
-        title: bodyRequest.title,
-        description: bodyRequest.description
+        Title: bodyRequest.title,
+        Plot: bodyRequest.description
     }
 
     filmes.push(novoFilme)
@@ -104,6 +106,66 @@ app.post("/filmes/cadastrar", async (request, response)=>{
     response.status(201).send({
         mensagem: "filme cadastrado com sucesso",
         novoFilme
+    })
+
+})
+
+app.delete("/filmes/deletar/:id", async (request, response)=>{
+    const dbFilmes = await bancoDeDados()
+    let filmesJson = dbFilmes.filmes
+    let idRequest = request.params.id
+
+    const filmeEncontrado = filmesJson.find(filme => filme.id == idRequest)
+
+    //pegar o indice do filme q sera deletado
+    const indice = filmesJson.indexOf(filmeEncontrado)
+
+    //ARRAY.splice(INDICE, NUMERO DE ITENS Q QUEREMOS DELETAR)
+    filmesJson.splice(indice, 1)
+
+    response.status(200).json({
+        "mensagem": "filme foi deletado com sucesso",
+        "filme-deletado": filmeEncontrado
+    })
+})
+
+//metodo PUT
+//substituir o dado
+
+app.put("/filmes/substituir/:id", async (request, response)=>{
+    const dbFilmes = await bancoDeDados()
+    let filmesJson = dbFilmes.filmes
+
+    let idRequest = request.params.id
+    let bodyRequest = request.body
+
+    let filmeEncontrado = filmesJson.find( filme => filme.id == idRequest)
+
+    const indice = filmesJson.indexOf(filmeEncontrado)
+
+    //ARRAY.splice(INDICE, o item que vamos deletar, o item q vei no lugar)
+    filmesJson.splice(indice, 1, bodyRequest)
+    response.status(200).json({
+        "mensagem": "filme atualizado com sucesso",
+        "filme-atualizado": bodyRequest
+    })
+})
+
+//metodo PATCH: atualizar somente titulo de um dado existente
+app.patch("/filmes/updatetitulo/:id", async (request, response)=>{
+    let dbFilmes = await bancoDeDados()
+    let filmesJson = dbFilmes.filmes
+
+    let idRequest = request.params.id
+    let novoTitulo = request.body.Title
+
+    let filmeEncontrado = filmesJson.find(filme => filme.id == idRequest)
+
+    filmeEncontrado.Title = novoTitulo
+
+    response.status(200).json({
+        "mensagem": "titulo atualizado com sucesso",
+        "filme-atualizado": filmeEncontrado
     })
 
 })
