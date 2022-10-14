@@ -1,0 +1,14 @@
+{
+  "name": "para-casa",
+  "version": "1.0.0",
+  "description": "<h1 align=\"center\">\r   <img src=\"../../assets/paraolar.png\" alt=\"logo reprograma\" width=\"500\">\r </h1>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "nodemodule": "^0.3.0"
+  }
+}
