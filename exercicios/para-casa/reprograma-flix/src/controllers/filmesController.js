@@ -7,7 +7,7 @@ async function dbConnect() {
 const getAllFilmes = async(request, response) => {
     try {
         const filmes = await dbConnect();
-        return dbConnect.status(200).send(filmes);
+        return response.status(200).send(filmes);
     } catch (error) {
         response.status(500).json({message: error.message});
     }
@@ -23,7 +23,7 @@ const getFilmeById = async(request, response) => {
             return response.status(404).json({message: "filme não encontrado"});
         }
 
-        return dbConnect.status(200).send(filme);
+        return response.status(200).send(filme);
     } catch (error) {
         response.status(500).json({message: error.message});
     }
@@ -39,7 +39,7 @@ const getFilmeByTitle = async(request, response) => {
             return response.status(404).json({message: "filme não encontrado"});
         }
 
-        return dbConnect.status(200).send(filme);
+        return response.status(200).send(filme);
     } catch (error) {
         response.status(500).json({message: error.message});
     }
@@ -48,14 +48,14 @@ const getFilmeByTitle = async(request, response) => {
 const getFilmeByGenre = async(request, response) => {
     try {
         const filmes = await dbConnect();
-        const generoQuery = request.query.titulo.toLowerCase();
+        const generoQuery = request.query.genero.toLowerCase();
         const filmesArray = filmes.filter( filme => filme.Genre.toLowerCase().includes(generoQuery) );
 
         if(filmesArray.length == 0) {
             return response.status(404).json({message: "filmes não encontrados"});
         }
 
-        return dbConnect.status(200).send(filmesArray);
+        return response.status(200).send(filmesArray);
     } catch (error) {
         response.status(500).json({message: error.message});
     }
@@ -73,7 +73,7 @@ const postFilme = async(request, response) => {
         }
 
         filmes.push(novoFilme);
-        return dbConnect.status(201).send({
+        return response.status(201).send({
             mensagem: "Filme cadastrado com sucesso",
             novoFilme
         });
@@ -98,7 +98,7 @@ const patchTituloFilme = async(request, response) => {
         filme.Title = novoTitulo;
 
         filmes.push(novoFilme);
-        return dbConnect.status(201).send({
+        return response.status(201).send({
             mensagem: "Filme atualizado com sucesso",
             filme
         });
@@ -130,7 +130,7 @@ const putFilme = async(request, response) => {
         }
 
         filmes.push(novoFilme);
-        return dbConnect.status(201).send({
+        return response.status(201).send({
             mensagem: "Filme atualizado com sucesso",
             filme
         });
@@ -161,7 +161,7 @@ const patchFilme = async(request, response) => {
         }
 
         filmes.push(novoFilme);
-        return dbConnect.status(201).send({
+        return response.status(201).send({
             mensagem: "Filme atualizado com sucesso",
             filme
         });

@@ -7,7 +7,7 @@ async function dbConnect() {
 const getAllSeries = async(request, response) => {
     try {
         const series = await dbConnect();
-        return dbConnect.status(200).send(series);
+        return response.status(200).send(series);
     } catch (error) {
         response.status(500).json({message: error.message});
     }
@@ -23,7 +23,7 @@ const getSerieById = async(request, response) => {
             return response.status(404).json({message: "série não encontrada"});
         }
 
-        return dbConnect.status(200).send(serie);
+        return response.status(200).send(serie);
     } catch (error) {
         response.status(500).json({message: error.message});
     }
@@ -39,7 +39,7 @@ const getSerieByTitle = async(request, response) => {
             return response.status(404).json({message: "série não encontrada"});
         }
 
-        return dbConnect.status(200).send(serie);
+        return response.status(200).send(serie);
     } catch (error) {
         response.status(500).json({message: error.message});
     }
@@ -48,14 +48,22 @@ const getSerieByTitle = async(request, response) => {
 const getSerieByGenre = async(request, response) => {
     try {
         const series = await dbConnect();
-        const generoQuery = request.query.titulo.toLowerCase();
-        const seriesArray = series.filter( serie => serie.genre.toLowerCase().includes(generoQuery) );
+        const generoQuery = request.query.genero.toLowerCase();
+        const seriesArray = series.filter( serie => {
+            const generos = serie.genre;
+            for (const genero of generos) {
+                if( genero.toLowerCase().includes(generoQuery) ){
+                    return true;
+                }
+            }
+            return false;
+        } );
 
         if(seriesArray.length == 0) {
             return response.status(404).json({message: "séries não encontradas"});
         }
 
-        return dbConnect.status(200).send(seriesArray);
+        return response.status(200).send(seriesArray);
     } catch (error) {
         response.status(500).json({message: error.message});
     }
@@ -73,7 +81,7 @@ const postSerie = async(request, response) => {
         }
 
         series.push(novaSerie);
-        return dbConnect.status(201).send({
+        return response.status(201).send({
             mensagem: "Série cadastrado com sucesso",
             novaSerie
         });
@@ -99,7 +107,7 @@ const patchTituloSerie = async(request, response) => {
         serie.title = novoTitulo;
 
         series.push(novoFilme);
-        return dbConnect.status(201).send({
+        return response.status(201).send({
             mensagem: "Série atualizada com sucesso",
             serie
         });
@@ -130,7 +138,7 @@ const putSerie = async(request, response) => {
         }
 
         series.push(novoFilme);
-        return dbConnect.status(201).send({
+        return response.status(201).send({
             mensagem: "Série atualizada com sucesso",
             serie
         });
@@ -162,7 +170,7 @@ const patchSerie = async(request, response) => {
         }
 
         series.push(novoFilme);
-        return dbConnect.status(201).send({
+        return response.status(201).send({
             mensagem: "Filme atualizado com sucesso",
             serie
         });
