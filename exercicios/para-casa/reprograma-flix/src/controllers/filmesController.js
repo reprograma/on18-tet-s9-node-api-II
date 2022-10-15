@@ -64,6 +64,7 @@ const getByGenre = async(request, response)=>{
 }
 
 const cadastrarNovoFilme = async(request, response)=>{
+    try {
         const filmesJson = await dbConnect()
         let bodyRequest = request.body
 
@@ -90,6 +91,10 @@ const cadastrarNovoFilme = async(request, response)=>{
             message: "Filme cadastrado com sucesso!",
             novoFilme 
         })
+    } catch (error) {
+        response.status(500).json({message: error.message})
+    }    
+    
     }
 
 const updateTitulo = async(request, response)=>{
@@ -110,6 +115,32 @@ const updateTitulo = async(request, response)=>{
     })
     } catch(error){
         response.status(404).json({message: error.message})
+    }
+}
+
+const updateFilme = async(request, response)=>{
+    try {
+        let filmesJson = await dbConnect()
+        let idRequest = request.params.id
+        let filmeAtualizado = request.body
+
+        let filmeEncontrado = filmesJson.find(filme => filme.id == idRequest)
+
+        if(filmeEncontrado == undefined) throw new Error("filme não encontrado")
+
+        const indice = filmesJson.indexOf(filmeEncontrado)
+
+        filmeAtualizado.id = filmeEncontrado.id
+
+        filmesJson.splice(indice, 1, filmeAtualizado)
+
+        response.status(200).json({
+            "mensagem": "filme atualizado com sucesso",
+            filmeAtualizado
+        })
+
+    } catch (error) {
+        response.status(404).send({message: error.message})
     }
 }
 
@@ -150,5 +181,6 @@ module.exports = {
     getByGenre,
     cadastrarNovoFilme,
     updateTitulo,
+    updateFilme,
     updateGenerico
 }

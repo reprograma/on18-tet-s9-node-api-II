@@ -109,11 +109,69 @@ const updateTitulo = async(request, response)=>{
     }
 }
 
+const updateSerie = async(request, response)=>{
+    try {
+        let seriesJson = await dbConnect()
+        let idRequest = request.params.id
+        let serieAtualizada = request.body
+
+        let serieEncontrada = seriesJson.find(serie => serie.id == idRequest)
+
+        if(serieEncontrada == undefined) throw new Error("série não encontrada")
+
+        const indice = seriesJson.indexOf(serieEncontrada)
+
+        serieAtualizada.id = serieEncontrada.id
+
+        seriesJson.splice(indice, 1, serieAtualizada)
+
+        response.status(200).json({
+            "mensagem": "série atualizada com sucesso",
+            serieAtualizada
+        })
+
+    } catch (error) {
+        response.status(404).send({message: error.message})
+    }
+}
+
+const updateGenerico = async(request, response)=>{
+    try {
+        const seriesJson = await dbConnect()
+        let idRequest = request.params.id
+        let bodyRequest = request.body
+
+        serieEncontrada = seriesJson.find(serie => serie.id == idRequest)
+
+        if(serieEncontrada == undefined) throw new Error("série não encontrada")
+
+        bodyRequest.id = serieEncontrada.id
+
+        let chaves = Object.keys(serieEncontrada)
+
+        chaves.forEach((chave) =>{
+            if(bodyRequest[chave] == undefined){
+                serieEncontrada[chave] = serieEncontrada[chave]
+            }else{
+                serieEncontrada[chave] = bodyRequest[chave]
+            }
+        })
+
+        response.status(200).json({"mensagem": "série atualizada", serieEncontrada})
+
+    } catch (error) {
+        response.status(404).json({message: error.message})
+    }
+}
+
+
 module.exports = {
     getAll,
     getById,
     getByTitle, 
     getByGenre,
     cadastrarNovaSerie,
-    updateTitulo
+    updateTitulo,
+    updateSerie,
+    updateGenerico
 }

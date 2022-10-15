@@ -16,6 +16,8 @@ router.post("/cadastrar", controller.cadastrarNovoFilme)
 
 router.patch("/updatetitulo/:id", controller.updateTitulo)
 
-router.put("/updateGenerico/:id"), controller.updateGenerico
+router.put("/updatefilme/:id", controller.updateFilme)
+
+router.put("/update-generico/:id", controller.updateGenerico)
 
 module.exports = router

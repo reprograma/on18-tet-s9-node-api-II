@@ -22,16 +22,17 @@ query: genero = " "
 [POST]"/filmes/cadastrar"
 
 201: cadastra um novo filme
+500: algo errado aconteceu
 
 [PATCH]"/filmes/updatetitulo/:id"
 200: retorna filme com o título atualizado
 404: filme não encontrado
 
-[PUT]"/filmes/substituir/:id"
+[PUT]"/filmes/updatefilme/:id"
 200: retorna filme com dados substituídos
 404: filme não encontrado
 
-[PUT]"/filmes/updateGenerico/:id"
+[PUT]"/filmes/update-generico/:id"
 200: retorna filme com a atualização
 404: filme não encontrado
 
@@ -59,15 +60,16 @@ query: genero = " "
 [POST]"/series/cadastrar"
 
 201: cadastra uma nova serie
+500: algo errado aconteceu
 
 [PATCH]"/series/updatetitulo/:id"
 200: retorna série com o título atualizado
 404: série não encontrada
 
-[PUT]"/series/substituir/:id"
+[PUT]"/series/updateserie/:id"
 200: retorna série com dados substituídos
 404: série não encontrada
 
-[PUT]"/series/updateGenerico/:id"
+[PUT]"/series/update-generico/:id"
 200: retorna série com a atualização
 404: série não encontrada

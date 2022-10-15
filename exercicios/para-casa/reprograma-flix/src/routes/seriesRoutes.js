@@ -15,4 +15,8 @@ router.post("/cadastrar", controller.cadastrarNovaSerie)
 
 router.patch("/updatetitulo/:id", controller.updateTitulo)
 
+router.put("/updateserie/:id", controller.updateSerie)
+
+router.put("/update-generico/:id", controller.updateGenerico)
+
 module.exports = router
