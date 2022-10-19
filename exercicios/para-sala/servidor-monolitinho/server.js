@@ -10,6 +10,7 @@ function bancoDeDados() {
     })
 }
 
+const { request, response } = require("express");
 //começa o nosso servidor
 
 const express = require("express")
@@ -30,7 +31,6 @@ app.get("/filmes/pesquisar/:id", async (request, response)=>{
     try {
         let idRequest = request.params.id
         let dbFilmes = await bancoDeDados()
-    
         let filmeEncontrado = dbFilmes.filmes.find( filme => filme.id == idRequest)
 
         if(filmeEncontrado == undefined) throw new Error("id não encontrado")
@@ -47,13 +47,12 @@ app.get("/filmes/pesquisar", async (request, response)=>{
         let dbFilmes = await bancoDeDados()
         let tituloRequest = request.query.titulo.toLowerCase()
 
-        let encontrarPorTitulo = dbFilmes.filmes.filter(filme => filme.title.toLowerCase().includes(tituloRequest))
+        let encontrarPorTitulo = dbFilmes.filmes.filter(filme => filme.Title.toLowerCase().includes(tituloRequest))
 
         console.log(encontrarPorTitulo)
 
         if(encontrarPorTitulo.length == 0) throw new Error("filme não encontrado")
         
-
         response.status(200).send(encontrarPorTitulo)
     } catch (error) {
         response.status(404).json({message: error.message})
@@ -69,6 +68,7 @@ app.get("/filmes/buscar", async (request, response)=>{
         console.log(parametros)
 
         const chaves = Object.keys(parametros);
+        console.log(chaves)
 
         const filtrado = filmesJson.filter((filme) => {
               return chaves.some(key => RegExp(parametros[key], 'i').test(filme[key].toString()));
@@ -78,7 +78,6 @@ app.get("/filmes/buscar", async (request, response)=>{
 
           if(filtrado.length == 0) throw new Error("filme não encontrado")
 
-        
         response.status(200).send(filtrado)
         
     } catch (error) {
@@ -105,7 +104,24 @@ app.post("/filmes/cadastrar", async (request, response)=>{
         mensagem: "filme cadastrado com sucesso",
         novoFilme
     })
+})
 
+app.delete("/filmes/deletar/:id", async (request, response) => {
+    const dbFilmes = await bancoDeDados()
+    let filmesJson = dbFilmes.filmes
+    let idRequest = request.params.id
+
+    const filmeEncontrado = filmesJson.find(filme => filme.id == idRequest)
+
+    //Pegar o indice do filme que sera deletado
+     const indice = filmesJson.indexOf(filmeEncontrado)
+     //Array.splice(indice que eu quero deletar, numero de itens que quero deletar)
+     filmesJson.splice(indice, 1)
+
+     response.status(200).json({
+        "mensagem": "Filme deletado com sucesso!!",
+        "filme-deletado": filmeEncontrado
+    })
 })
 
 app.get("/series", async (request, response)=>{

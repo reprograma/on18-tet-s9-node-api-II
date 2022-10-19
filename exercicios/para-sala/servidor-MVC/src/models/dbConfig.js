@@ -14,7 +14,7 @@ function bancoDeDados(dado){
         }, 1500);
     })
 }
-
+//vai exportar: Isso permite que todo mundo da pasta src posa acessar o banco de dados.
 module.exports ={
     bancoDeDados
 }

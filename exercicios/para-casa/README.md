@@ -8,11 +8,11 @@
 - Documente sua API de forma adequada
 
 ### Pedidos de negócio
-- [ ] Quero uma rota que venha todos os filmes e series
+- [x] Quero uma rota que venha todos os filmes e series
 duas rotas a /filmes e a /series
-- [ ] /filmes deve retornar todos os filmes
+- [x] /filmes deve retornar todos os filmes
 - [ ] /series deve retornar todos as series
-- [ ] Devo conseguir filtrar por titulo, id e genero
+- [x] Devo conseguir filtrar por titulo, id e genero
 - [ ] Devo conseguir cadastrar filmes e series
 - [ ] Devo conseguir editar o nome de qualquer um deles
 - [ ] Devo conseguir substituir tudo de um filme ou serie
