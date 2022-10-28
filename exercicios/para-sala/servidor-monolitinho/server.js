@@ -10,6 +10,7 @@ function bancoDeDados() {
     })
 }
 
+const { application } = require("express");
 //começa o nosso servidor
 
 const express = require("express")
@@ -152,9 +153,70 @@ app.put("/filmes/substituir/:id", async (request, response)=>{
 })
 
 //metodo PATCH: atualizar somente titulo de um dado existente
-app.patch("/filmes/updatetitulo/:id", async (request, response)=>{
+// app.patch("/filmes/updatetitulo/:id", async (request, response)=>{
+//     let dbFilmes = await bancoDeDados()
+//     let filmesJson = dbFilmes.filmes
+
+//     let idRequest = request.params.id
+//     let novoTitulo = request.body.Title
+
+//     let filmeEncontrado = filmesJson.find(filme => filme.id == idRequest)
+
+//     filmeEncontrado.Title = novoTitulo
+
+//     response.status(200).json({
+//         "mensagem": "titulo atualizado com sucesso",
+//         "filme-atualizado": filmeEncontrado
+//     })
+
+// })
+
+
+// estudo e treino
+
+// app.delete("/filmes/deletar/:id", async (request, response) => {
+//     const dbFilmes = await bancoDeDados()
+//     let filmesJson = dbFilmes.filmes
+//     let idRequest = request.params.id
+
+//     const filmeEncontrado = filmesJson.find(filme => filme.id == idRequest)
+
+//     const indice = filmesJson.indexOf(filmeEncontrado)
+
+//     filmesJson.splice(indice, 1)
+
+//     response.status(200).json({
+//         messagem: "filme deletado com sucess",
+//         filmeEncontrado
+//     })
+
+
+// })
+
+
+// app.put("/filmes/substituir/:id", async (request, response)=> {
+//     const dbFilmes = await bancoDeDados()
+//     let filmesJson = dbFilmes.filmes
+
+//     let idRequest = request.params.id
+//     let bodyRequest = request.body
+
+//     let filmeEncontrado = filmesJson.find(filme => filme.id == idRequest)
+
+//     const indice = filmesJson.indexOf(filmeEncontrado)
+
+//     filmesJson.splice(indice, 1, bodyRequest)
+
+//     response.status(200).json({
+//         "messagem": "filme atualizado com sucesso",
+//         "filme-atualizado": bodyRequest
+//     })
+
+// })
+
+app.patch("/filmes/updatetitulo/:id", async (request, response) => {
     let dbFilmes = await bancoDeDados()
-    let filmesJson = dbFilmes.filmes
+    let filmesJson =  dbFilmes.filmes
 
     let idRequest = request.params.id
     let novoTitulo = request.body.Title
@@ -163,12 +225,20 @@ app.patch("/filmes/updatetitulo/:id", async (request, response)=>{
 
     filmeEncontrado.Title = novoTitulo
 
-    response.status(200).json({
-        "mensagem": "titulo atualizado com sucesso",
+    response.status(200).json ({
+        "message": "titulo atualizado com sucesso",
         "filme-atualizado": filmeEncontrado
     })
 
+
+
+
 })
+
+
+
+
+
 
 app.get("/series", async (request, response)=>{
     let dbseries = await bancoDeDados()
