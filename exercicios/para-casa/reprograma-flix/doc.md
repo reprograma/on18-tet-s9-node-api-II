@@ -19,6 +19,10 @@
     - 200: sucesso para o cadastro de um novo filme
     - 500: erro para a falta do campo titulo
 
+- [PUT] "/filmes/modificar/:id"
+   - 200: sucesso para mofificação
+   - 404: erro; não encontrado
+
 - [PATCH] "/filmes/update/:id"
     - 200: sucesso para atualizar o titulo de um filme
 
@@ -43,13 +47,17 @@
 - 200: sucesso para a pesquisa pelo id
 - 404: id não encontrado
 
-<!-- - [GET] "/series/buscar"
+- [GET] "/series/buscar"
 - 200: sucesso para gênero buscado
-- 404: erro para gênero não encontrado -->
+- 404: erro para gênero não encontrado
 
 - [POST] "/series/cadastrar"
     - 200: sucesso para o cadastro de uma nova serie
     - 500: erro genérico
+
+- [PUT] "/series/modificar/:id"
+   - 200: sucesso para mofificação
+   - 404: erro; não encontrado
 
 - [PATCH] "/series/update/:id"
     - 200: sucesso para atualizar o titulo de uma serie

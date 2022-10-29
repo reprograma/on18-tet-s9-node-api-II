@@ -9,10 +9,11 @@ router.get("/pesquisar", controller.getByTitle)
 router.get("/pesquisar/:id", controller.getById)
 router.get("/buscar", controller.getByGenre)
 router.post("/cadastrar", controller.postNewFilm)
+router.put("/modificar/:id", controller.putUpdateGenerico)
 router.patch("/update/:id", controller.patchTitle)
 router.put("/substituir/:id", controller.putInfo)
 
-// router.patch("/mudar/:id", controller.patchQualquerCampo)
+
 
 
 module.exports = router

@@ -12,12 +12,10 @@
 - [x] /filmes deve retornar todos os filmes
 - [x] /series deve retornar todos as series
 - [x] Devo conseguir filtrar por titulo, id e genero 
-// não consegui fazer o de serie por gênero
 - [x] Devo conseguir cadastrar filmes e series
 - [x] Devo conseguir editar o nome de qualquer um deles
 - [x] Devo conseguir substituir tudo de um filme ou serie
-- [ ] Devo conseguir editar qualquer campo deles
-// não consegui fazer o de qualquer campo. 
+- [x] Devo conseguir editar qualquer campo deles
 - [x] Quero casos de erro
 ---
 

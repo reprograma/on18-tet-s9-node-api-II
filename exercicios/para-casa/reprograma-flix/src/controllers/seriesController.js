@@ -1,4 +1,4 @@
-const { json } = require("express")
+const { json, response } = require("express")
 const dbConfig = require("../models/dbConfig")
 
 async function dbConnect() {
@@ -59,17 +59,23 @@ const getById = async(request, response) =>{
 
 }
 
+// corrigido:
+const getByGenre = async (request, response) =>{
+    try {
+        const seriesJson =  await dbConnect()
+        const generoRequest = request.query.genero
 
-//o get por genero, eu não consegui fazer. Vou assistir a resolução e enviar em um segundo commit
-// const getByGenre = async(request, response) =>{
-//     let seriesJson = dbConnect()
-//     let generoRequest = request.query.genero.toLowerCase()
-//     let encontraPorGenero = seriesJson.filter(serie => serie.genre.toLowerCase().includes(generoRequest))
-//     if(encontraPorGenero.length == 0) throw new Error("Erro")
-//     response.status(200).send(encontraPorGenero)
-// }
+        const seriesFiltradas = seriesJson.filter(filme => filme.genre.toString().toLowerCase().includes(generoRequest))
 
+        response.status(200).send(seriesFiltradas)
 
+    } catch (error) {
+        response.status(404).json({
+            message: error.message
+        })
+    }
+
+}
 
 const postNewSeries = async (request, response) => {
 
@@ -98,6 +104,40 @@ const postNewSeries = async (request, response) => {
 
 }
 
+// esse put foi feito depois de reassistir aula de revisão.
+const putUpdateGenerico = async (request, response) => {
+    try {
+        let seriesJson = await dbConnect()
+        let idRequest = request.params.id
+        let bodyRequest = request.body
+
+        let encontraPeloId = seriesJson.find(serie => serie.id == idRequest)
+
+        bodyRequest.id = encontraPeloId.id
+
+        let chaves = Object.keys(encontraPeloId)
+
+        chaves.forEach((chave) => {
+            if(bodyRequest[chave] == undefined){
+                encontraPeloId[chaves] = encontraPeloId[chave]
+            } else {
+                encontraPeloId[chave] = bodyRequest[chave]
+            }
+        })
+
+        response.status(200).json({
+            "mensagem": "serie atualizada com sucesso", encontraPeloId
+        })
+
+
+    } catch (error) {
+        response.status(404).json({
+            message: error.menssage
+        })
+        
+    }
+
+}
 
 const patchTitle = async(request, response) =>{
     let seriesJson = await dbConnect()
@@ -142,7 +182,7 @@ module.exports = {
     getById,
     getByGenre,
     postNewSeries,
+    putUpdateGenerico,
     patchTitle,
     putInfo
-    // getByGenre
 }

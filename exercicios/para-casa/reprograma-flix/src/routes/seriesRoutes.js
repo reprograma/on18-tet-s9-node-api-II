@@ -9,10 +9,10 @@ router.get("/pesquisar", controller.getByTitle)
 router.get("/pesquisar/:id", controller.getById)
 router.get("/buscar", controller.getByGenre)
 router.post("/cadastrar", controller.postNewSeries)
+router.put("/modificar/:id", controller.putUpdateGenerico)
 router.patch("/update/:id", controller.patchTitle)
 router.put("/substituir/:id", controller.putInfo)
 
-// router.get("/buscar", controller.getByGenre)
 
 
 module.exports = router

@@ -104,42 +104,38 @@ const postNewFilm = async(request, response) =>{
     
 }
 
-// Esse de editar qualquer campo eu não consegui fazer sozinha. Ainda não revi a aula de revisão e nem a resolução. Farei um novo commit quando eu tiver a resposta
+// esse put foi feito após rever a aula de revisão do conteúdo
+const putUpdateGenerico = async (request, response) =>{
 
-// const patchQualquerCampo = async(request, response) =>{
-//     try {
-//         let filmesJson = await dbConnect()
-//         let idRequest = request.params.id
-//         let bodyRequest = request.body
+    try {
+        const filmesJson = await dbConnect()
+        let idRequest = request.params.id
+        let bodyRequest = request.body
 
-//         let filmeEncontrado = filmesJson.find(filme => filme.id == idRequest)
+        let encontraPeloId = filmesJson.find(filme => filme.id == idRequest)
 
-//         let chavesFilmes = Object.keys(filmeEncontrado)
-//         let chavesDaRequest = Object.keys(bodyRequest)
+        bodyRequest.id = encontraPeloId.id
 
-//         if(chavesFilmes.includes(chavesDaRequest)){
-//             let valoresDaRequest = Object.values(bodyRequest)
-//             let valoresDoMeuFilme = Object.values(filmeEncontrado)
+        // object.keys retorna uma array
+        let chaves = Object.keys(encontraPeloId)
 
-//             valoresDoMeuFilme = valoresDaRequest
+        chaves.forEach((chave) => {
+            if(bodyRequest[chave] == undefined) {
+                encontraPeloId[chave] = encontraPeloId[chave]
+            } else {
+                encontraPeloId[chave] = bodyRequest[chave]
+            }
+        })
 
-//         } else {
-//             throw new Error(" erro")
-//         }
+        response.status(200).json({"menssagem": "filme atualizado", encontraPeloId })
 
-//         response.status(200).json({
-//             message: "campo atualizado com sucesso",
-//             filmeEncontrado
-//         })
+    } catch (error) {
+        response.status(404).json({
+            message: error.message
+        })
+    }
 
-//     } catch (error) {
-//         response.status(500).json({
-//             message: error.message
-//         })
-//     } 
-    
-
-// }
+}
 
 
 
@@ -189,7 +185,7 @@ module.exports = {
     getById,
     getByGenre,
     postNewFilm,
-    // patchQualquerCampo,
+    putUpdateGenerico,
     putInfo,
     patchTitle,
     
