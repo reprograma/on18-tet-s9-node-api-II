@@ -1,0 +1,25 @@
+{
+  "name": "on18-tet-s9-node-api-ii",
+  "version": "1.0.0",
+  "description": "<h1 align=\"center\">\r   <img src=\"assets/reprograma-fundos-claros.png\" alt=\"logo reprograma\" width=\"500\">\r </h1>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+     
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AngelaValentin/on18-tet-s9-node-api-II.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AngelaValentin/on18-tet-s9-node-api-II/issues"
+  },
+  "homepage": "https://github.com/AngelaValentin/on18-tet-s9-node-api-II#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20"
+  }
+}
