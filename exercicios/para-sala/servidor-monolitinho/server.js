@@ -10,6 +10,7 @@ function bancoDeDados() {
     })
 }
 
+const { response, request } = require("express");
 //começa o nosso servidor
 
 const express = require("express")
@@ -47,7 +48,7 @@ app.get("/filmes/pesquisar", async (request, response)=>{
         let dbFilmes = await bancoDeDados()
         let tituloRequest = request.query.titulo.toLowerCase()
 
-        let encontrarPorTitulo = dbFilmes.filmes.filter(filme => filme.title.toLowerCase().includes(tituloRequest))
+        let encontrarPorTitulo = dbFilmes.filmes.filter(filme => filme.Title.toLowerCase().includes(tituloRequest))
 
         console.log(encontrarPorTitulo)
 
@@ -112,6 +113,47 @@ app.get("/series", async (request, response)=>{
     let dbseries = await bancoDeDados()
 
     response.status(200).send(dbseries.series)
+})
+
+app.delete("/filmes/delete/:id", async (request,response) => {
+    const dbFilmes = await bancoDeDados()
+    let filmesJson = dbFilmes.filmes
+    let idRequest = request.params.id
+
+    const filmeEncontrado = filmesJson.find(filme => filme.id == idRequest)
+
+    const indice = filmesJson.indexOf(filmeEncontrado)
+
+    filmesJson.splice(indice, 1)
+
+    response.status(200).json({
+        "mensagem": "O filme foi deletado com sucesso",
+        "filme-deletado": filmeEncontrado
+    })
+})
+
+app.put("filmes/substituir/:id", async (request, response) => {
+    const dbFilmes = await bancoDeDados()
+    let filmesJson = dbFilmes.filmes
+
+    let idRequest = request.params.id
+
+    const filmesEncontrado = filmesJson.find(filme => filme.id == idRequest)
+    let indice = filmesJson.indexOf(filmesEncontrado)
+
+    filmesJson.splice(indice, 1, bodyRequest)
+    response.status(200).json({
+        "mensagem": "filme atualizado com sucesso",
+        "filme-atualizado": bodyRequest
+    })
+})
+
+app.patch("/filmes/updatetitulo/:id", async (request, response) => {
+    let dbFilmes = await bancoDeDados()
+    let let filmesJson = dbFilmes.filmes
+
+    let idRequest = request.params.id
+    let novoTitulo = request.body.Title
 })
 
 app.listen(1313, ()=>{
